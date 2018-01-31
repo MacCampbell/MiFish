@@ -1,0 +1,28 @@
+Example on trimming long sequences
+
+arakihitoshinoMacBook-Pro:testdata animal_ecology_guest$ for f in *.fastq; do ./fastx_trimmer -l 150 -i $f -o $f.trimmed -Q33; done;
+
+gzip .trimmed
+
+arakihitoshinoMacBook-Pro:testdata animal_ecology_guest$ for f in *.fastq; do ./fastx_trimmer -l 150 -i $f -o $f.trimmed  -Q33; done;
+
+
+###
+
+#! /bin/bash
+
+#uncompress
+gunzip *.gz; 
+
+#trim
+for f in *.fastq; do ./fastx_trimmer -l 150 -i $f -o $f.trimmed -Q33; done;
+#remove intermediates
+"Yes" | rm *.fastq;
+#rename
+for file in *.trimmed; do mv $file `basename $file .fastq.trimmed`.tm.fastq; done;
+#recompress
+gzip *.tm.fastq
+
+
+
+
